@@ -1,8 +1,16 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="using:TodoListApp.Converters"
              x:Class="TodoListApp.App"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Resources>
+        <converters:OverdueBrushConverter x:Key="OverdueBrushConverter"/>
+        <converters:OverdueTextConverter x:Key="OverdueTextConverter"/>
+        <converters:StringNotEmptyConverter x:Key="StringNotEmptyConverter"/>
+        <converters:NullableDateConverter x:Key="NullableDateConverter"/>
+    </Application.Resources>
 
     <Application.Styles>
         <FluentTheme />
