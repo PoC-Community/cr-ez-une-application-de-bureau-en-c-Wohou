@@ -11,9 +11,9 @@ public class OverdueBrushConverter : IValueConverter
     {
         if (value is bool isOverdue && isOverdue)
         {
-            return Colors.Red;
+            return new SolidColorBrush(Color.Parse("#E53E3E")); // Red background for overdue
         }
-        return Colors.Transparent;
+        return new SolidColorBrush(Color.Parse("#101D42")); // Dark blue background normal
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
@@ -28,9 +28,9 @@ public class OverdueTextConverter : IValueConverter
     {
         if (value is bool isOverdue && isOverdue)
         {
-            return new SolidColorBrush(Colors.Red);
+            return new SolidColorBrush(Color.Parse("#FFFFFF")); // White text for overdue
         }
-        return new SolidColorBrush(Colors.Gray);
+        return new SolidColorBrush(Color.Parse("#89D2DC")); // Cyan text normal
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

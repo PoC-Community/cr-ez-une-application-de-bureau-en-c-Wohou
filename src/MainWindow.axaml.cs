@@ -25,28 +25,37 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
-        InitializeComponent();
-        TaskList.ItemsSource = _filteredTasks;
+        try
+        {
+            InitializeComponent();
+            TaskList.ItemsSource = _filteredTasks;
 
-        AddButton.Click += OnAddClick;
-        DeleteButton.Click += OnDeleteClick;
-        CompleteAllButton.Click += OnCompleteAllClick;
-        ClearCompletedButton.Click += OnClearCompletedClick;
+            AddButton.Click += OnAddClick;
+            DeleteButton.Click += OnDeleteClick;
+            CompleteAllButton.Click += OnCompleteAllClick;
+            ClearCompletedButton.Click += OnClearCompletedClick;
 
-        // Filter buttons (Step 7)
-        FilterAllButton.Click += (s, e) => ApplyFilter("All");
-        FilterTodayButton.Click += (s, e) => ApplyFilter("Today");
-        FilterWeekButton.Click += (s, e) => ApplyFilter("Week");
-        FilterOverdueButton.Click += (s, e) => ApplyFilter("Overdue");
+            // Filter buttons (Step 7)
+            FilterAllButton.Click += (s, e) => ApplyFilter("All");
+            FilterTodayButton.Click += (s, e) => ApplyFilter("Today");
+            FilterWeekButton.Click += (s, e) => ApplyFilter("Week");
+            FilterOverdueButton.Click += (s, e) => ApplyFilter("Overdue");
 
-        // Tag filter
-        TagFilterInput.TextChanged += (s, e) => ApplyTagFilter(TagFilterInput.Text ?? "");
+            // Tag filter
+            TagFilterInput.TextChanged += (s, e) => ApplyTagFilter(TagFilterInput.Text ?? "");
 
-        // Step 9: Auto-save on changes
-        _tasks.CollectionChanged += OnTasksChanged;
+            // Step 9: Auto-save on changes
+            _tasks.CollectionChanged += OnTasksChanged;
 
-        // Load tasks on startup (Step 4)
-        LoadTasksAsync();
+            // Load tasks on startup (Step 4)
+            LoadTasksAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error in MainWindow constructor: {ex.Message}");
+            Console.WriteLine($"Stack trace: {ex.StackTrace}");
+            throw;
+        }
     }
 
     private async void LoadTasksAsync()

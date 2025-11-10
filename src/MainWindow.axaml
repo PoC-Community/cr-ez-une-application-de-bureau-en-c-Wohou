@@ -2,93 +2,340 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:models="using:TodoListApp.Models"
         x:Class="TodoListApp.MainWindow"
-        Title="To-Do List"
-        Width="650" Height="700">
+        Title="PoC - Todo List App"
+        Width="900" Height="750"
+        MinWidth="800" MinHeight="600"
+        Background="#0D1317">
 
-    <StackPanel Margin="20">
-        <TextBlock Text="My To-Do List" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+    <Window.Styles>
+        <!-- Primary Button Style (Blue Royal) -->
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#232ED1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="16,10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="#6564DB"/>
+        </Style>
+        <Style Selector="Button:pressed">
+            <Setter Property="Background" Value="#101D42"/>
+        </Style>
 
-        <!-- Add Task Section -->
-        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,10">
-            <StackPanel>
-                <TextBlock Text="Add New Task" FontWeight="Bold" Margin="0,0,0,5"/>
+        <!-- Secondary Button Style (Dark with cyan accent) -->
+        <Style Selector="Button.secondary">
+            <Setter Property="Background" Value="#101D42"/>
+            <Setter Property="Foreground" Value="#89D2DC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#6564DB"/>
+        </Style>
+        <Style Selector="Button.secondary:pointerover">
+            <Setter Property="Background" Value="#232ED1"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
-                <TextBox x:Name="TaskInput" Watermark="Enter task title..." Margin="0,0,0,5"/>
+        <!-- Danger Button Style (Red with proper contrast) -->
+        <Style Selector="Button.danger">
+            <Setter Property="Background" Value="#E53E3E"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.danger:pointerover">
+            <Setter Property="Background" Value="#C53030"/>
+        </Style>
 
-                <TextBox x:Name="TagsInput" Watermark="Tags (comma-separated, e.g., work, urgent)" Margin="0,0,0,5"/>
+        <!-- Filter Button Style (Dark theme) -->
+        <Style Selector="Button.filter">
+            <Setter Property="Background" Value="#101D42"/>
+            <Setter Property="Foreground" Value="#89D2DC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#6564DB"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <Style Selector="Button.filter:pointerover">
+            <Setter Property="Background" Value="#232ED1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#89D2DC"/>
+        </Style>
 
-                <StackPanel Margin="0,0,0,5">
-                    <TextBlock Text="Due Date (optional):" Margin="0,0,0,5"/>
-                    <DatePicker x:Name="DueDatePicker" HorizontalAlignment="Stretch"/>
-                </StackPanel>
+        <!-- TextBox Style (Dark theme) -->
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="#101D42"/>
+            <Setter Property="Foreground" Value="#89D2DC"/>
+            <Setter Property="BorderBrush" Value="#6564DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style Selector="TextBox:focus">
+            <Setter Property="BorderBrush" Value="#89D2DC"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+    </Window.Styles>
 
-                <Button x:Name="AddButton" Content="Add Task" HorizontalAlignment="Right" Width="100"/>
+    <Grid Margin="0,40,0,0">
+        <!-- Header with gradient background -->
+        <Border Height="120"
+                VerticalAlignment="Top"
+                Margin="0,-40,0,0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#232ED1" Offset="0"/>
+                    <GradientStop Color="#6564DB" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel VerticalAlignment="Center" Margin="40,0">
+                <TextBlock Text="✓ Scooby(To)Do"
+                          FontSize="32"
+                          FontWeight="Bold"
+                          Foreground="#89D2DC"
+                          Margin="0,0,0,5"/>
+                <TextBlock Text="C# Desktop Todo List Application"
+                          FontSize="14"
+                          Foreground="White"
+                          FontWeight="Bold"/>
             </StackPanel>
         </Border>
 
-        <!-- Filter Section -->
-        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,10">
-            <StackPanel>
-                <TextBlock Text="Filters" FontWeight="Bold" Margin="0,0,0,5"/>
+        <ScrollViewer Margin="40,100,40,20" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="20">
 
-                <WrapPanel>
-                    <Button x:Name="FilterAllButton" Content="All" Margin="0,0,5,5" Width="60"/>
-                    <Button x:Name="FilterTodayButton" Content="Today" Margin="0,0,5,5" Width="60"/>
-                    <Button x:Name="FilterWeekButton" Content="This Week" Margin="0,0,5,5" Width="80"/>
-                    <Button x:Name="FilterOverdueButton" Content="Overdue" Margin="0,0,5,5" Width="70"/>
-                </WrapPanel>
+                <!-- Add Task Section - Modern Card -->
+                <Border Background="#101D42"
+                        CornerRadius="16"
+                        Padding="24"
+                        BorderBrush="#6564DB"
+                        BorderThickness="1">
+                    <StackPanel Spacing="16">
+                        <TextBlock Text="➕ Create New Task"
+                                  FontSize="18"
+                                  FontWeight="SemiBold"
+                                  Foreground="#89D2DC"/>
 
-                <TextBox x:Name="TagFilterInput" Watermark="Filter by tag..." Margin="0,5,0,0"/>
-            </StackPanel>
-        </Border>
+                        <TextBox x:Name="TaskInput"
+                                Watermark="What needs to be done?"
+                                FontSize="15"
+                                MinHeight="44"/>
 
-        <!-- Task List -->
-        <TextBlock Text="Tasks (double-click to edit)" FontWeight="Bold" Margin="0,0,0,5"/>
-        <ListBox x:Name="TaskList" Height="300" DoubleTapped="OnTaskDoubleClick">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="models:TaskItem">
-                    <Border Padding="5" Margin="2" CornerRadius="3">
-                        <Border.Background>
-                            <SolidColorBrush Color="{Binding IsOverdue, Converter={StaticResource OverdueBrushConverter}}" Opacity="0.3"/>
-                        </Border.Background>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding IsCompleted, Mode=TwoWay}" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontWeight="Bold"/>
-                            </StackPanel>
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                            <TextBox x:Name="TagsInput"
+                                    Grid.Column="0"
+                                    Watermark="🏷️ Tags (work, urgent...)"
+                                    FontSize="14"/>
 
-                            <!-- Tags Display -->
-                            <StackPanel Orientation="Horizontal" Margin="25,5,0,0">
-                                <TextBlock Text="🏷️ " FontSize="11"
-                                          IsVisible="{Binding Tags, Converter={StaticResource StringNotEmptyConverter}}"/>
-                                <TextBlock Text="{Binding Tags}" Foreground="Gray" FontSize="11"
-                                          IsVisible="{Binding Tags, Converter={StaticResource StringNotEmptyConverter}}"/>
-                            </StackPanel>
+                            <DatePicker x:Name="DueDatePicker"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Stretch"
+                                       MinHeight="44"/>
+                        </Grid>
 
-                            <!-- Due Date Display -->
-                            <StackPanel Orientation="Horizontal" Margin="25,0,0,0">
-                                <TextBlock Text="📅 " FontSize="11"
-                                          IsVisible="{Binding DueDate, Converter={StaticResource NullableDateConverter}}"/>
-                                <TextBlock Text="{Binding DueDateDisplay}" FontSize="11"
-                                          Foreground="{Binding IsOverdue, Converter={StaticResource OverdueTextConverter}}"
-                                          IsVisible="{Binding DueDate, Converter={StaticResource NullableDateConverter}}"/>
-                            </StackPanel>
+                        <Button x:Name="AddButton"
+                               Content="➕ Add Task"
+                               HorizontalAlignment="Right"
+                               MinWidth="140"
+                               FontSize="14"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Filter Section - Modern Pills -->
+                <Border Background="#101D42"
+                        CornerRadius="16"
+                        Padding="24"
+                        BorderBrush="#6564DB"
+                        BorderThickness="1">
+                    <StackPanel Spacing="16">
+                        <TextBlock Text="🔍 Filter &amp; Search"
+                                  FontSize="18"
+                                  FontWeight="SemiBold"
+                                  Foreground="#89D2DC"/>
+
+                        <WrapPanel>
+                            <Button x:Name="FilterAllButton"
+                                   Content="📋 All"
+                                   Classes="filter"
+                                   Margin="0,0,8,8"/>
+                            <Button x:Name="FilterTodayButton"
+                                   Content="📅 Today"
+                                   Classes="filter"
+                                   Margin="0,0,8,8"/>
+                            <Button x:Name="FilterWeekButton"
+                                   Content="📆 This Week"
+                                   Classes="filter"
+                                   Margin="0,0,8,8"/>
+                            <Button x:Name="FilterOverdueButton"
+                                   Content="⚠️ Overdue"
+                                   Classes="filter"
+                                   Margin="0,0,8,8"/>
+                        </WrapPanel>
+
+                        <TextBox x:Name="TagFilterInput"
+                                Watermark="🔎 Search by tag..."
+                                FontSize="14"
+                                MinHeight="44"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Task List - Modern Cards -->
+                <Border Background="#101D42"
+                        CornerRadius="16"
+                        Padding="24"
+                        BorderBrush="#6564DB"
+                        BorderThickness="1">
+                    <StackPanel Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="📝 Your Tasks"
+                                      FontSize="18"
+                                      FontWeight="SemiBold"
+                                      Foreground="#89D2DC"
+                                      VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1"
+                                      Text="💡 Double-click to edit"
+                                      FontSize="12"
+                                      Foreground="#6564DB"
+                                      VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <Border Background="#0D1317"
+                                CornerRadius="12"
+                                Padding="4"
+                                MinHeight="350">
+                            <ListBox x:Name="TaskList"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    DoubleTapped="OnTaskDoubleClick">
+                                <ListBox.Styles>
+                                    <Style Selector="ListBoxItem">
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Margin" Value="0,0,0,8"/>
+                                    </Style>
+                                    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Style>
+                                </ListBox.Styles>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="models:TaskItem">
+                                        <Border Background="{Binding IsOverdue, Converter={StaticResource OverdueBrushConverter}}"
+                                                CornerRadius="12"
+                                                Padding="16"
+                                                BorderBrush="#6564DB"
+                                                BorderThickness="1"
+                                                Margin="4">
+                                            <Border.Styles>
+                                                <Style Selector="Border:pointerover">
+                                                    <Setter Property="Background" Value="#232ED1"/>
+                                                    <Setter Property="BorderBrush" Value="#89D2DC"/>
+                                                </Style>
+                                            </Border.Styles>
+
+                                            <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto">
+                                                <!-- Checkbox -->
+                                                <CheckBox Grid.Column="0"
+                                                         Grid.Row="0"
+                                                         IsChecked="{Binding IsCompleted, Mode=TwoWay}"
+                                                         VerticalAlignment="Center"
+                                                         Margin="0,0,12,0"/>
+
+                                                <!-- Task Title -->
+                                                <TextBlock Grid.Column="1"
+                                                          Grid.Row="0"
+                                                          Text="{Binding Title}"
+                                                          FontSize="15"
+                                                          FontWeight="Medium"
+                                                          Foreground="#89D2DC"
+                                                          TextWrapping="Wrap"
+                                                          VerticalAlignment="Center"/>
+
+                                                <!-- Tags and Date Info -->
+                                                <StackPanel Grid.Column="1"
+                                                           Grid.Row="1"
+                                                           Orientation="Horizontal"
+                                                           Spacing="12"
+                                                           Margin="0,8,0,0">
+                                                    <!-- Tags -->
+                                                    <Border Background="#232ED1"
+                                                           CornerRadius="12"
+                                                           Padding="8,4"
+                                                           IsVisible="{Binding Tags, Converter={StaticResource StringNotEmptyConverter}}">
+                                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                                            <TextBlock Text="🏷️" FontSize="11"/>
+                                                            <TextBlock Text="{Binding Tags}"
+                                                                      FontSize="12"
+                                                                      Foreground="White"/>
+                                                        </StackPanel>
+                                                    </Border>
+
+                                                    <!-- Due Date -->
+                                                    <Border Background="{Binding IsOverdue, Converter={StaticResource OverdueBrushConverter}}"
+                                                           CornerRadius="12"
+                                                           Padding="8,4"
+                                                           BorderBrush="#6564DB"
+                                                           BorderThickness="1"
+                                                           IsVisible="{Binding DueDate, Converter={StaticResource NullableDateConverter}}">
+                                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                                            <TextBlock Text="📅" FontSize="11"/>
+                                                            <TextBlock Text="{Binding DueDateDisplay}"
+                                                                      FontSize="12"
+                                                                      Foreground="{Binding IsOverdue, Converter={StaticResource OverdueTextConverter}}"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Action Buttons - Modern -->
+                <Border Background="#101D42"
+                        CornerRadius="16"
+                        Padding="20"
+                        BorderBrush="#6564DB"
+                        BorderThickness="1">
+                    <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                        <!-- Save Status -->
+                        <StackPanel Grid.Column="0"
+                                   Orientation="Horizontal"
+                                   Spacing="8"
+                                   VerticalAlignment="Center">
+                            <Border Background="#232ED1"
+                                   CornerRadius="20"
+                                   Padding="12,6">
+                                <TextBlock x:Name="SaveStatusText"
+                                          Text="✓ All changes saved"
+                                          Foreground="White"
+                                          FontSize="13"
+                                          FontWeight="Medium"/>
+                            </Border>
                         </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
 
-        <!-- Action Buttons -->
-        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
-            <Button x:Name="DeleteButton" Content="Delete Selected" Width="120" Margin="0,0,5,0"/>
-            <Button x:Name="CompleteAllButton" Content="Complete All" Width="120" Margin="0,0,5,0"/>
-            <Button x:Name="ClearCompletedButton" Content="Clear Completed" Width="120" Margin="0,0,5,0"/>
-        </StackPanel>
-
-        <!-- Save Status -->
-        <TextBlock x:Name="SaveStatusText" Text="All changes saved"
-                   HorizontalAlignment="Center" Margin="0,10,0,0"
-                   Foreground="Green" FontSize="12"/>
-    </StackPanel>
+                        <!-- Action Buttons -->
+                        <Button x:Name="DeleteButton"
+                               Grid.Column="1"
+                               Content="🗑️ Delete"
+                               Classes="danger"
+                               Margin="8,0"/>
+                        <Button x:Name="CompleteAllButton"
+                               Grid.Column="2"
+                               Content="✓ Complete All"
+                               Classes="secondary"
+                               Margin="8,0"/>
+                        <Button x:Name="ClearCompletedButton"
+                               Grid.Column="3"
+                               Content="🧹 Clear Done"
+                               Classes="secondary"
+                               Margin="8,0,0,0"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Window>
