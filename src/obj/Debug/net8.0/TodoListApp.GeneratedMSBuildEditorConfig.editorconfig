@@ -15,14 +15,14 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TodoListApp
-build_property.ProjectDir = /home/milok/C--workshop-template/src/
+build_property.ProjectDir = C:\Users\benja\OneDrive\Bureau\Bureau\EPITECH\PoC_C#\cr-ez-une-application-de-bureau-en-c-Wohou\src\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[/home/milok/C--workshop-template/src/App.axaml]
+[C:/Users/benja/OneDrive/Bureau/Bureau/EPITECH/PoC_C\#/cr-ez-une-application-de-bureau-en-c-Wohou/src/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/milok/C--workshop-template/src/MainWindow.axaml]
+[C:/Users/benja/OneDrive/Bureau/Bureau/EPITECH/PoC_C\#/cr-ez-une-application-de-bureau-en-c-Wohou/src/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/milok/C--workshop-template/src/TodoListApp.csproj": {}
+    "C:\\Users\\benja\\OneDrive\\Bureau\\Bureau\\EPITECH\\PoC_C#\\cr-ez-une-application-de-bureau-en-c-Wohou\\src\\TodoListApp.csproj": {}
   },
   "projects": {
-    "/home/milok/C--workshop-template/src/TodoListApp.csproj": {
+    "C:\\Users\\benja\\OneDrive\\Bureau\\Bureau\\EPITECH\\PoC_C#\\cr-ez-une-application-de-bureau-en-c-Wohou\\src\\TodoListApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/milok/C--workshop-template/src/TodoListApp.csproj",
+        "projectUniqueName": "C:\\Users\\benja\\OneDrive\\Bureau\\Bureau\\EPITECH\\PoC_C#\\cr-ez-une-application-de-bureau-en-c-Wohou\\src\\TodoListApp.csproj",
         "projectName": "TodoListApp",
-        "projectPath": "/home/milok/C--workshop-template/src/TodoListApp.csproj",
-        "packagesPath": "/home/milok/.nuget/packages/",
-        "outputPath": "/home/milok/C--workshop-template/src/obj/",
+        "projectPath": "C:\\Users\\benja\\OneDrive\\Bureau\\Bureau\\EPITECH\\PoC_C#\\cr-ez-une-application-de-bureau-en-c-Wohou\\src\\TodoListApp.csproj",
+        "packagesPath": "C:\\Users\\benja\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\benja\\OneDrive\\Bureau\\Bureau\\EPITECH\\PoC_C#\\cr-ez-une-application-de-bureau-en-c-Wohou\\src\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/milok/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\benja\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -79,11 +79,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.20, 8.0.20]"
+              "version": "[8.0.18, 8.0.18]"
             },
             {
-              "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[8.0.20, 8.0.20]"
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.18, 8.0.18]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.18, 8.0.18]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.18, 8.0.18]"
             }
           ],
           "frameworkReferences": {
@@ -91,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.110/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
